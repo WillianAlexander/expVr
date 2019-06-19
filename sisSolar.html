@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<!-- <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script> -->
+		<script src="js/aframe09.js"></script>
+		<script type="text/javascript">
+			AFRAME.registerComponent('escena',{
+				init:function () {
+					var scene= this; 
+					
+					
+				}
+			});
+		</script>
+	</head>
+	<body>	
+		<a-scene escena>
+			<a-assets>
+				<img id="sol" src="imagen/sol.jpg">
+				<img id="earth" src="imagen/earth.jpg">
+				<img id= "mercury" src= "imagen/mercury.jpg">
+				<img id= "venus" src= "imagen/venus.jpg">
+				<img id= "mars" src= "imagen/mars.jpg">
+			</a-assets>
+				<a-sphere position="0 0 0" radius="5" material="src:#sol" 
+		 		animation="property: rotation; dur:5000;to:0 360 0;easing:linear; loop:true" >
+		 		</a-sphere>
+
+		 		<a-entity position="0 0 0" animation="property: rotation; dur:8000;to:0 360 0;easing:linear; loop:true">
+		 			<a-sphere position="10 0 0" radius="0.48" material="src:#mercury" animation="property: rotation; dur:5000;to:0 360 0;easing:linear; loop:true" ></a-sphere>
+		 		</a-entity>	
+			 	<a-entity position="0 0 0" geometry="primitive: ring; radiusInner: 9.9; radiusOuter: 10;" rotation="90" material="side: double" ></a-entity>
+
+		 		<a-entity position="0 0 0" animation="property: rotation; dur:10000;to:0 360 0;easing:linear; loop:true">
+					<a-sphere position="15 0 0" radius="1.2" material="src:#venus" animation="property: rotation; dur:7500;to:0 360 0;easing:linear; loop:true" >						
+					</a-sphere>		
+		 		</a-entity>
+		 		<a-entity geometry="primitive: ring; radiusInner: 14.9; radiusOuter: 15;" rotation="90" material="side: double" ></a-entity>
+
+		 		<a-entity position="0 0 0" animation="property: rotation; dur:12500;to:0 360 0;easing:linear; loop:true">
+					<a-sphere position="19 0 0" radius="1.2" material="src:#earth" animation="property: rotation; dur:5000;to:0 360 0;easing:linear; loop:true" >	
+					</a-sphere>	
+		 		</a-entity>
+		 		<a-entity geometry="primitive: ring; radiusInner: 18.9; radiusOuter: 19;" rotation="90" material="side: double" ></a-entity>
+
+		 		<a-entity position="0 0 0" animation="property: rotation; dur:15000;to:0 360 0;easing:linear; loop:true">
+					<a-sphere position="27 0 0" radius="0.6" material="src:#mars" animation="property: rotation; dur:5000;to:0 360 0;easing:linear; loop:true" >	
+					</a-sphere>	
+		 		</a-entity>
+		 		<a-entity geometry="primitive: ring; radiusInner: 26.9; radiusOuter: 27;" rotation="90" material="side: double" ></a-entity>
+			
+				<a-camera position="0 6 -45" rotation="0 0 0">
+					<a-cursor color="#ff8080"/>
+				</a-camera>
+			<a-sky src="imagen/space-background.png"></a-sky>
+
+		</a-scene>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+		<script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.0/dist/aframe-physics-system.min.js"></script>
+		<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+	
+	<a-scene >
+		<a-assets>
+			<img id="ladrillo1" src="imagen/wall1.jpg">
+			<img id="ladrillo2" src="imagen/wall2.jpg">
+			<img id="sky" src="imagen/back360darkside.jpg">
+			<img id="floor" src="imagen/floor.jpg">
+
+
+		<!-- Include Objects Blender -->
+
+			<a-asset-item id="pac2-obj" src="imagen/pac2.obj"></a-asset-item>
+    		<a-asset-item id="pac2-mtl" src="imagen/pac2.mtl"></a-asset-item>
+    		<a-asset-item id="GhostFreak-obj" src="imagen/Demonio.obj"></a-asset-item>
+    		<a-asset-item id="GhostFreak-mtl" src="imagen/Demonio.mtl"></a-asset-item>
+    		<a-asset-item id="lamp-obj" src="imagen/lamp.obj"></a-asset-item>
+    		<a-asset-item id="lamp-mtl" src="imagen/lamp.mtl"></a-asset-item>
+    		<a-asset-item id="crown-obj" src="imagen/crown.obj"></a-asset-item>
+    		<a-asset-item id="crown-mtl" src="imagen/crown.mtl"></a-asset-item> 
+    		<a-asset-item id="ghost" src="ghost/scene.gltf"></a-asset-item>
+			
+		</a-assets>
+
+		<a-sky src="#sky"></a-sky>
+			
+
+ 		<a-plane  static-body height="500" width="500" rotation="-90 0 0" position="0 -0.5 0" material="opacity:0.0; repeat:100 80;color:#fafafa;metalness:0.2;roughness:0.1;"></a-plane>
+
+		<a-entity light="type: ambient; intensity: 0.70; distance: 10; decay: 1" position="0 5 -20" color="#fff" ></a-entity>
+
+         
+		<a-sound src="url(audio/fear.mp3)" autoplay="true" position="0 2 5" volume=8 ></a-sound>
+
+		<a-entity id="floor" static-body geometry="depth:300;height:0.2;width:300;" position="0 -1.0 0" material="repeat:100 80;color:#fafafa;metalness:0.2;roughness:0.1;src:#floor"></a-entity>
+		
+		
+
+  	<!-- 	<a-entity static-body gltf-model="#ghost" position="6 -0.9 11" scale="0.25 0.25 0.25" animation="property:rotation; to:0 90 0;from:0 -90 0;dur:2000; loop:true; dir:alternate"></a-entity> -->
+  		
+
+
+
+<!--   		<a-entity obj-model="obj: #lamp-obj; mtl: #lamp-mtl" position="0.50 -1 11" scale="0.36 0.36 0.36" rotation="0 90 0">
+
+		</a-entity>
+		 <a-entity obj-model="obj: #lamp-obj; mtl: #lamp-mtl" position="-0.40 -1 11" scale="0.36 0.36 0.36" rotation="0 90 0">
+
+		</a-entity> -->
+		<!-- <a-entity obj-model="obj: #crown-obj; mtl: #crown-mtl" position="0.70 1.17 10.4" scale="0.05 0.05 0.05" rotation="0 0 0">
+		 	animation="property: position; to: -1 0.75 11; dur: 1500; easing: linear; loop:true; dir:alternate" > 
+		</a-entity>
+		<a-entity obj-model="obj: #crown-obj; mtl: #crown-mtl" position="-0.65 1.17 10.4" scale="0.05 0.05 0.05" rotation="0 0 0">
+		 	animation="property: position; to: -1 0.75 11; dur: 1500; easing: linear; loop:true; dir:alternate"  
+		</a-entity>
+
+		<a-entity obj-model="obj: #GhostFreak-obj; mtl: #GhostFreak-mtl" position="10 0 10.4" scale="0.05 0.05 0.05" rotation="90 0 0"></a-entity>-->
+
+
+
+		<a-camera id="player" userHeight="1.6" player="health: 200" universal-controls position="0 1.6 12" kinematic-body="radius:0.25">
+		  	<!-- <a-entity obj-model="obj: #pac2-obj; mtl: #pac2-mtl"  scale="0.25 0.5 0.25" >
+  			</a-entity> -->
+ 			<a-cursor position="0 0 -0.5" geometry="primitive:ring;radiusInner:0.01;radiusOuter:0.016" material="opacity:0.5;shader:flat;transparent:true;color:#ff9" scale="0.8 0.8 0.8" raycaster>
+ 			<a-entity light="type: point; intensity: 1; distance: 2; color:darkgreen;"
+          position="0 0 0" rotacion="-90 0 0"></a-entity>
+ 			</a-cursor>
+			
+		</a-camera>
+				
+	</a-scene>
+
+	<script type="text/javascript">
+		var mat=[[1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1],
+				 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+				 [1,0,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,0,1],
+				 [1,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,1],
+ 				 [1,0,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,0,1],
+				 [1,0,0,0,0,1,0,0,0,1,2,0,0,1,0,0,0,0,1],
+				 [1,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,1],
+				 [0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0],
+				 [1,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,1],
+                 [0,0,0,0,2,0,0,1,1,1,1,1,0,0,2,0,0,0,0],
+                 [1,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,1],
+                 [0,0,2,1,0,1,0,0,0,0,0,0,0,1,0,1,2,0,0],
+                 [1,1,1,1,0,1,2,1,1,1,1,1,0,1,0,1,1,1,1],
+                 [1,0,0,2,0,0,0,0,0,1,0,0,0,0,0,0,2,0,1],
+                 [1,0,1,1,0,1,1,1,0,1,0,1,1,1,2,1,1,0,1],
+                 [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
+                 [1,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,1],
+                 [1,0,2,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1],
+                 [3,0,3,1,1,1,1,1,0,3,0,1,1,1,1,1,1,0,1],
+                 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                 [1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1]];
+		
+		var ele=document.querySelector("a-scene");
+		if(ele.hasLoaded){
+			ejecutar();
+
+		}else{
+			ele.addEventListener('loaded', ejecutar);
+		}
+		function ejecutar(argument) {
+			// body...
+			//var box=document.querySelector("a-box");
+			//box.setAttribute("color","red");
+			crearMarco();
+
+		}
+		function crearMarco(){
+			var eletem=document.querySelector("a-scene");
+			for (var i = 0; i < mat.length; i++) {
+				for (var j = 0; j < mat[i].length; j++) {
+					
+					//el primero
+					if(mat[i][j]==1){
+						var boxtem= document.createElement("a-box");
+						eletem.appendChild(boxtem);
+						var posTem={x:j-9,y:0, z:i-10};
+						boxtem.setAttribute("position",posTem);
+						boxtem.setAttribute("height","2");
+						boxtem.setAttribute("static-body","");
+
+						//boxtem.setAttribute("color","#445675");//src="#cesped"
+						boxtem.setAttribute("src","#ladrillo1"); //upload to server
+					}
+					if(mat[i][j]==3){
+						var boxtem= document.createElement("a-box");
+						eletem.appendChild(boxtem);
+						var posTem={x:j-9,y:0, z:i-10};
+						boxtem.setAttribute("position",posTem);
+						boxtem.setAttribute("height","2");
+						boxtem.setAttribute("static-body","");
+
+						//boxtem.setAttribute("color","#445675");//src="#cesped"
+						boxtem.setAttribute("src","#ladrillo2"); //upload to server
+					}
+					if(mat[i][j]==2){
+						var entitytem= document.createElement("a-entity");
+						eletem.appendChild(entitytem);
+						var posTem={x:j-9,y:-0.7, z:i-10};
+						//var rotTem={x:90,y:0, z:0};
+						//console.log(posTem);
+						//var model={obj:"#GhostFreak-obj",mtl:"#GhostFreak-mtl"};
+						var scale={x:0.20,y:0.20, z:0.20}
+						entitytem.setAttribute("position",posTem);
+						entitytem.setAttribute("rotation","90 0 0");
+						entitytem.setAttribute("gltf-model","#ghost");//"obj: #fantasma2-obj; mtl: #fantasma2-mtl"
+						var tiempo= Math.random() * (4000 - 500) + 3000;
+						entitytem.setAttribute("scale",scale);
+						var cadPosto=""+posTem.x+" 0.50 "+posTem.z;
+						var aniTem1="property:position; to: "+cadPosto+";dur:"+tiempo+"; easing:linear; loop:true; dir:alternate";
+						entitytem.setAttribute("animation",aniTem1);
+						//var cadRotTo="0 90 0";
+						var aniTem2="property:rotation; to:0 90 0;from:0 -90 0;dur:"+tiempo+"; loop:true; dir:alternate";
+						entitytem.setAttribute("animation__2",aniTem2);
+						entitytem.setAttribute("static-body","shape:box");
+						//static-body="shape: box"
+
+						console.log(entitytem);
+
+					}
+				}
+			}
+			cargarLampara(eletem);
+
+			
+		}
+		function cargarLampara(eleScene){
+			var entitytem= document.createElement("a-entity");
+			eleScene.appendChild(entitytem);
+			var posTem={x:0.5,y:-1, z:11};
+			var scale={x:0.36,y:0.36, z:0.36};
+			var model={obj:"#lamp-obj",mtl:"#lamp-mtl"};
+			entitytem.setAttribute("position",posTem);
+			entitytem.setAttribute("rotation","0 90 0");
+			entitytem.setAttribute("obj-model",model);
+			entitytem.setAttribute("scale",scale);//0.50 -1 11
+
+			var entitytem= document.createElement("a-entity");
+			eleScene.appendChild(entitytem);
+			var posTem={x:-0.4,y:-1, z:11};
+			var scale={x:0.36,y:0.36, z:0.36};
+			var model={obj:"#lamp-obj",mtl:"#lamp-mtl"};
+			entitytem.setAttribute("position",posTem);
+			entitytem.setAttribute("rotation","0 90 0");
+			entitytem.setAttribute("obj-model",model);
+			entitytem.setAttribute("scale",scale);//0.50 -1 11
+
+		}
+
+		AFRAME.registerComponent('static-movement', {
+    		schema: {default: ''},
+    		init: function () {
+       			var el = this.el;
+       			el.addEventListener('click', function () {
+          			document.querySelector('#player').setAttribute('position', el.getAttribute('position'));
+          			console.log("Click: Player moved");
+       			});
+   			}
+		});
+
+		AFRAME.registerComponent('player', {
+		  schema: {
+		    health: {type: 'int', default: 200},
+		    alive: {type: 'boolean', default: true},
+		  },
+		  init: function () {
+		    var el = this.el;
+		  },
+		 
+		   reduceHealth: function (damage) {
+		    if(this.data.health > 0)
+		      this.data.health -= damage;
+		    if(this.data.health <= 0) {
+		      this.data.alive = false;
+		      this.data.health = 0;
+		    }
+		   },
+		 
+		   getHealth: function () {
+		    return this.data.health;
+		   },
+		 
+		   isDead: function () {
+		    return !this.data.alive;
+		   },
+		 
+		   updateHealthText: function () {
+		    document.querySelector('#text-health-player').setAttribute('text', 'value', 'HP ' + this.data.health);
+		   }
+		});
+		
+	</script>
+</body>
+
+</html>
